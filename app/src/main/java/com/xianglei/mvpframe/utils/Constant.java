@@ -9,5 +9,6 @@ package com.xianglei.mvpframe.utils;
 public class Constant {
 
     public static final String GANK_URL = "http://gank.io/";
+    public static final String PATH_ANDROID = "api/data/Android/";
 
 }
