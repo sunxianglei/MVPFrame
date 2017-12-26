@@ -10,62 +10,62 @@ import android.util.Log;
 
 public class Logger {
 
-    public void v(String tag, String msg) {
-        if (Config.isLog) {
+    public static void v(String tag, String msg) {
+        if (Config.DEBUG) {
             Log.v(tag, msg);
         }
     }
 
-    public void v(String tag, String msg, Throwable e) {
-        if (Config.isLog) {
+    public static void v(String tag, String msg, Throwable e) {
+        if (Config.DEBUG) {
             Log.v(tag, msg, e);
         }
     }
 
-    public void d(String tag, String msg) {
-        if (Config.isLog) {
+    public static void d(String tag, String msg) {
+        if (Config.DEBUG) {
             Log.d(tag, msg);
         }
     }
 
-    public void d(String tag, String msg, Throwable e) {
-        if (Config.isLog) {
+    public static void d(String tag, String msg, Throwable e) {
+        if (Config.DEBUG) {
             Log.d(tag, msg, e);
         }
     }
 
-    public void i(String tag, String msg) {
-        if (Config.isLog) {
+    public static void i(String tag, String msg) {
+        if (Config.DEBUG) {
             Log.i(tag, msg);
         }
     }
 
-    public void i(String tag, String msg, Throwable e) {
-        if (Config.isLog) {
+    public static void i(String tag, String msg, Throwable e) {
+        if (Config.DEBUG) {
             Log.i(tag, msg, e);
         }
     }
 
-    public void w(String tag, String msg) {
-        if (Config.isLog) {
+    public static void w(String tag, String msg) {
+        if (Config.DEBUG) {
             Log.w(tag, msg);
         }
     }
 
-    public void w(String tag, String msg, Throwable e) {
-        if (Config.isLog) {
+    public static void w(String tag, String msg, Throwable e) {
+        if (Config.DEBUG) {
             Log.w(tag, msg, e);
         }
     }
 
-    public void e(String tag, String msg) {
-        if (Config.isLog) {
+    public static void e(String tag, String msg) {
+        if (Config.DEBUG) {
             Log.e(tag, msg);
         }
     }
 
-    public void e(String tag, String msg, Throwable e) {
-        if (Config.isLog) {
+    public static void e(String tag, String msg, Throwable e) {
+        if (Config.DEBUG) {
             Log.e(tag, msg, e);
         }
     }

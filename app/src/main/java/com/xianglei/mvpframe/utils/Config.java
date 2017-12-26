@@ -8,6 +8,6 @@ package com.xianglei.mvpframe.utils;
 
 public class Config {
 
-    public static final boolean isLog = true;       // 是否打开日志开关
+    public static final boolean DEBUG = true;       // 是否打开日志开关
 
 }
