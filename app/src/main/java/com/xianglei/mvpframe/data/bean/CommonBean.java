@@ -13,8 +13,8 @@ package com.xianglei.mvpframe.data.bean;
 
 public class CommonBean<T> {
 
-    public Boolean error;
-    public T results;
+    private Boolean error;
+    private T results;
 
     public Boolean getError() {
         return error;

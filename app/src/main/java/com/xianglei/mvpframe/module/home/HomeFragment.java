@@ -1,13 +1,11 @@
 package com.xianglei.mvpframe.module.home;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.View;
 
 import com.xianglei.mvpframe.R;
 import com.xianglei.mvpframe.base.BaseFragment;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
-import com.xianglei.mvpframe.data.bean.CommonBean;
 import com.xianglei.mvpframe.utils.Logger;
 
 import java.util.List;
@@ -58,6 +56,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
 
     @Override
     public void setArticleList(List<ArticleInfo> articleList) {
-        Logger.d(TAG, "dismissLoadingDialog");
+        Logger.d(TAG, "setArticleList");
     }
 }

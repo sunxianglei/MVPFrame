@@ -12,6 +12,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -35,15 +36,27 @@ public class HomeModel implements HomeContract.Model{
         if(1 == page){  //刷新了
             mArticles.clear();
         }
-        if(0 == size) return;
+        if(0 == size) {
+            return;
+        }
         Observable<CommonBean<List<ArticleInfo>>> ob = RetrofitFactory.getApiService().getArticles(size, page);
         ob.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<CommonBean<List<ArticleInfo>>>() {
+                .map(new Function<CommonBean<List<ArticleInfo>>, List<ArticleInfo>>() {
                     @Override
-                    public void accept(CommonBean<List<ArticleInfo>> listCommonBean) throws Exception {
+                    public List<ArticleInfo> apply(CommonBean<List<ArticleInfo>> listCommonBean) throws Exception {
+                        if(listCommonBean != null && !listCommonBean.getError()){
+                            return listCommonBean.getResults();
+                        }
+                        Logger.d(TAG, "无数据返回");
+                        return null;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<ArticleInfo>>() {
+                    @Override
+                    public void accept(List<ArticleInfo> articleInfos) throws Exception {
                         Logger.d(TAG, "accept");
-                        mArticles.addAll(listCommonBean.getResults());
+                        mArticles.addAll(articleInfos);
                         mCallBackListener.onSuccess(mArticles);
                     }
                 });
