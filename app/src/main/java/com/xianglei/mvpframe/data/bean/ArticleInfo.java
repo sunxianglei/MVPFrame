@@ -29,6 +29,7 @@ public class ArticleInfo {
     private String url;
     private String desc;
     private String who;
+    private List<String> images;
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
@@ -101,5 +102,29 @@ public class ArticleInfo {
 
     public String getWho() {
         return who;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
+    @Override
+    public String toString() {
+        return "ArticleInfo{" +
+                "createdAt='" + createdAt + '\'' +
+                ", publishedAt='" + publishedAt + '\'' +
+                ", _id='" + _id + '\'' +
+                ", source='" + source + '\'' +
+                ", used=" + used +
+                ", type='" + type + '\'' +
+                ", url='" + url + '\'' +
+                ", desc='" + desc + '\'' +
+                ", who='" + who + '\'' +
+                ", images=" + images +
+                '}';
     }
 }
