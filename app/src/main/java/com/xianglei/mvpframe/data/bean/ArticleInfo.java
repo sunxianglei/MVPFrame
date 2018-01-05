@@ -112,19 +112,4 @@ public class ArticleInfo {
         this.images = images;
     }
 
-    @Override
-    public String toString() {
-        return "ArticleInfo{" +
-                "createdAt='" + createdAt + '\'' +
-                ", publishedAt='" + publishedAt + '\'' +
-                ", _id='" + _id + '\'' +
-                ", source='" + source + '\'' +
-                ", used=" + used +
-                ", type='" + type + '\'' +
-                ", url='" + url + '\'' +
-                ", desc='" + desc + '\'' +
-                ", who='" + who + '\'' +
-                ", images=" + images +
-                '}';
-    }
 }

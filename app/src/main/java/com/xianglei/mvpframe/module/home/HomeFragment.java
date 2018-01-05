@@ -17,7 +17,6 @@ import com.xianglei.mvpframe.utils.PrintObject;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author sunxianglei
@@ -44,9 +43,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View, OnR
 
     @Override
     protected void initViews(View view, Bundle savedInstanceState) {
-        ButterKnife.bind(this, view);
-//        mRefreshLayout.setOnRefreshListener(this);
-//        mRefreshLayout.setOnLoadmoreListener(this);
+        mRefreshLayout.setOnRefreshListener(this);
+        mRefreshLayout.setOnLoadmoreListener(this);
     }
 
     @Override
@@ -72,8 +70,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View, OnR
 
     @Override
     public void setArticleList(List<ArticleInfo> articleList) {
-//        mRefreshLayout.finishRefresh();
-//        mRefreshLayout.finishLoadmore();
+        mRefreshLayout.finishRefresh();
+        mRefreshLayout.finishLoadmore();
         Logger.d(TAG, PrintObject.toString(articleList.get(0)));
     }
 
@@ -87,4 +85,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View, OnR
     public void onLoadmore(RefreshLayout refreshlayout) {
         mHomePresenter.getArticles(SIZE,++PAGE);
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        mHomePresenter.getArticles(SIZE,PAGE);
+//    }
 }

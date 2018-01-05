@@ -1,6 +1,8 @@
 package com.xianglei.mvpframe.utils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * @author sunxianglei
@@ -9,21 +11,32 @@ import java.lang.reflect.Field;
 
 public class PrintObject {
 
+    /**
+     * 通过反射打印传入对象的属性值
+     * @param bean
+     * @return
+     */
     public static String toString(Object bean){
         StringBuilder sb = new StringBuilder();
-        Class c = (Class)bean.getClass();
+        Class c = bean.getClass();
+        sb.append(c.getSimpleName() + "[");
         Field fields[] = c.getDeclaredFields();
-        for(int i=0;i<fields.length;i++){
-            Field f = fields[i];
-            Object value = null;
+        for(Field f: fields){
+            String name = f.getName();
+            name = name.substring(0,1).toUpperCase() + name.substring(1);
             try {
-                value = f.get(bean);
+                Method m = bean.getClass().getDeclaredMethod("get" + name);
+                String value = (String) m.invoke(bean);
+                sb.append(f.getName() + " = " + value + ",");
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
             }
-            System.out.println("name:" + f.getName() + " value:" + value);
-            sb.append("name:" + f.getName() + " value:" + value);
         }
+        sb.append("]");
         return sb.toString();
     }
 
