@@ -5,12 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.xianglei.mvpframe.R;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -32,21 +35,29 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.context = context;
     }
 
+    public void setData(List<ArticleInfo> articleInfos){
+        this.articleInfos = articleInfos;
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (ITEM_TYPE_RIGHTIMG == viewType) {
-            return new RightImgHolder(LayoutInflater.from(context).inflate(R.layout.item_home_rightimg, parent, false));
-        } else if (ITEM_TYPE_TOPIMG == viewType) {
-            return new TopImgHolder(LayoutInflater.from(context).inflate(R.layout.item_home_topimg, parent, false));
-        } else {
+//        if (ITEM_TYPE_RIGHTIMG == viewType) {
+//            return new RightImgHolder(LayoutInflater.from(context).inflate(R.layout.item_home_rightimg, parent, false));
+//        } else if (ITEM_TYPE_TOPIMG == viewType) {
+//            return new TopImgHolder(LayoutInflater.from(context).inflate(R.layout.item_home_topimg, parent, false));
+//        } else {
             return new NormalHolder(LayoutInflater.from(context).inflate(R.layout.item_home_normal, parent, false));
-        }
+//        }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof NormalHolder){
-
+            ((NormalHolder) holder).contentTV.setText(articleInfos.get(position).getDesc());
+            ((NormalHolder) holder).domainTV.setText(articleInfos.get(position).getType());
+            ((NormalHolder) holder).authorTV.setText(articleInfos.get(position).getWho());
+//            ((NormalHolder) holder).iconIV.setBackground();
         }else if(holder instanceof RightImgHolder){
 
         }else if(holder instanceof TopImgHolder){
@@ -73,6 +84,15 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public static class NormalHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.tv_content)
+        TextView contentTV;
+        @BindView(R.id.tv_domain)
+        TextView domainTV;
+        @BindView(R.id.tv_author)
+        TextView authorTV;
+        @BindView(R.id.icon)
+        ImageView iconIV;
 
         public NormalHolder(View itemView) {
             super(itemView);

@@ -34,6 +34,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View, OnR
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
+    private HomeAdapter mHomeAdapter;
     private HomeContract.Presenter mHomePresenter;
 
     @Override
@@ -45,6 +46,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View, OnR
     protected void initViews(View view, Bundle savedInstanceState) {
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setOnLoadmoreListener(this);
+        mHomeAdapter = new HomeAdapter(null, getContext());
+        mRecyclerView.setAdapter(mHomeAdapter);
     }
 
     @Override
@@ -72,6 +75,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View, OnR
     public void setArticleList(List<ArticleInfo> articleList) {
         mRefreshLayout.finishRefresh();
         mRefreshLayout.finishLoadmore();
+        mHomeAdapter.setData(articleList);
         Logger.d(TAG, PrintObject.toString(articleList.get(0)));
     }
 

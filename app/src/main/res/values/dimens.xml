@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--34sp/45sp/56sp/112sp 超大号文字-->
+    <dimen name="caption_textsize">12sp</dimen>         <!--12sp 小字提示-->
+    <dimen name="body_textsize">14sp</dimen>            <!--14sp 正文/按钮文字-->
+    <dimen name="subhead_textsize">16sp</dimen>         <!--16sp 小标题-->
+    <dimen name="title_textsize">20sp</dimen>           <!--20sp Appbar文字-->
+    <dimen name="headline_textsize">24sp</dimen>        <!--24sp 大标题-->
+
+    <!--一切距离、尺寸都应该是8dp的整数倍-->
+    <dimen name="status_height">24dp</dimen>            <!--顶部状态栏高度：24dp-->
+    <dimen name="bar_height">56dp</dimen>               <!--Appbar最小高度：56dp-->
+    <dimen name="bottom_bar_height">48dp</dimen>        <!--底部导航栏高度：48dp-->
+    <dimen name="float_button_big">56dp</dimen>         <!--悬浮按钮尺寸：56x56dp-->
+    <dimen name="float_button_small">40dp</dimen>       <!--悬浮按钮尺寸：40x40dp-->
+    <dimen name="head_icon_big">64dp</dimen>            <!--用户头像尺寸：64x64dp-->
+    <dimen name="head_icon_small">40dp</dimen>          <!--用户头像尺寸：40x40dp-->
+    <dimen name="small_icon">24dp</dimen>
+    <dimen name="super_small_icon">16dp</dimen>
+    <dimen name="margin_normal">8dp</dimen>             <!--一般间距：8dp/16dp-->
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="padding_normal">8dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+
+
+</resources>
