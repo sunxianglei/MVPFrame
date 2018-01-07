@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.xianglei.mvpframe.R;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
 
@@ -30,6 +31,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<ArticleInfo> articleInfos;
     private Context context;
 
+    public HomeAdapter(Context context){
+        this.context = context;
+    }
+
     public HomeAdapter(List<ArticleInfo> articleInfos, Context context) {
         this.articleInfos = articleInfos;
         this.context = context;
@@ -42,13 +47,13 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        if (ITEM_TYPE_RIGHTIMG == viewType) {
-//            return new RightImgHolder(LayoutInflater.from(context).inflate(R.layout.item_home_rightimg, parent, false));
-//        } else if (ITEM_TYPE_TOPIMG == viewType) {
-//            return new TopImgHolder(LayoutInflater.from(context).inflate(R.layout.item_home_topimg, parent, false));
-//        } else {
+        if (ITEM_TYPE_RIGHTIMG == viewType) {
+            return new RightImgHolder(LayoutInflater.from(context).inflate(R.layout.item_home_rightimg, parent, false));
+        } else if (ITEM_TYPE_TOPIMG == viewType) {
+            return new TopImgHolder(LayoutInflater.from(context).inflate(R.layout.item_home_topimg, parent, false));
+        } else {
             return new NormalHolder(LayoutInflater.from(context).inflate(R.layout.item_home_normal, parent, false));
-//        }
+        }
     }
 
     @Override
@@ -57,9 +62,15 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((NormalHolder) holder).contentTV.setText(articleInfos.get(position).getDesc());
             ((NormalHolder) holder).domainTV.setText(articleInfos.get(position).getType());
             ((NormalHolder) holder).authorTV.setText(articleInfos.get(position).getWho());
+            ((NormalHolder) holder).timeTV.setText(articleInfos.get(position).getPublishedAt());
 //            ((NormalHolder) holder).iconIV.setBackground();
         }else if(holder instanceof RightImgHolder){
-
+            ((RightImgHolder) holder).contentTV.setText(articleInfos.get(position).getDesc());
+            ((RightImgHolder) holder).domainTV.setText(articleInfos.get(position).getType());
+            ((RightImgHolder) holder).authorTV.setText(articleInfos.get(position).getWho());
+            Glide.with(context)
+                    .load(articleInfos.get(position).getImages().get(0))
+                    .into(((RightImgHolder) holder).iconIV);
         }else if(holder instanceof TopImgHolder){
 
         }
@@ -91,6 +102,8 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView domainTV;
         @BindView(R.id.tv_author)
         TextView authorTV;
+        @BindView(R.id.tv_time)
+        TextView timeTV;
         @BindView(R.id.icon)
         ImageView iconIV;
 
@@ -102,6 +115,15 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public static class RightImgHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.tv_content)
+        TextView contentTV;
+        @BindView(R.id.tv_domain)
+        TextView domainTV;
+        @BindView(R.id.tv_author)
+        TextView authorTV;
+        @BindView(R.id.icon)
+        ImageView iconIV;
 
         public RightImgHolder(View itemView) {
             super(itemView);

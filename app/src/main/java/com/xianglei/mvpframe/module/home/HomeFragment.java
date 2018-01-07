@@ -1,6 +1,7 @@
 package com.xianglei.mvpframe.module.home;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -14,6 +15,7 @@ import com.xianglei.mvpframe.data.bean.ArticleInfo;
 import com.xianglei.mvpframe.utils.Logger;
 import com.xianglei.mvpframe.utils.PrintObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,7 +48,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View, OnR
     protected void initViews(View view, Bundle savedInstanceState) {
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setOnLoadmoreListener(this);
-        mHomeAdapter = new HomeAdapter(null, getContext());
+        mHomeAdapter = new HomeAdapter(new ArrayList<ArticleInfo>(), getContext());
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mHomeAdapter);
     }
 

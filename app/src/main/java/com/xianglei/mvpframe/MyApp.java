@@ -27,7 +27,7 @@ public class MyApp extends Application {
             @NonNull
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
-                layout.setPrimaryColors(R.color.colorPrimary, android.R.color.white);
+//                layout.setPrimaryColors(R.color.colorPrimary, android.R.color.white);
                 return new ClassicsHeader(context);
             }
         });
