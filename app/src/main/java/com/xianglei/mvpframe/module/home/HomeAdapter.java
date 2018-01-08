@@ -72,7 +72,12 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .load(articleInfos.get(position).getImages().get(0))
                     .into(((RightImgHolder) holder).iconIV);
         }else if(holder instanceof TopImgHolder){
-
+            ((TopImgHolder) holder).contentTV.setText(articleInfos.get(position).getDesc());
+            ((TopImgHolder) holder).domainTV.setText(articleInfos.get(position).getType());
+            ((TopImgHolder) holder).authorTV.setText(articleInfos.get(position).getWho());
+            Glide.with(context)
+                    .load(articleInfos.get(position).getImages().get(0))
+                    .into(((TopImgHolder) holder).iconIV);
         }
     }
 
@@ -133,6 +138,15 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public static class TopImgHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.tv_content)
+        TextView contentTV;
+        @BindView(R.id.tv_domain)
+        TextView domainTV;
+        @BindView(R.id.tv_author)
+        TextView authorTV;
+        @BindView(R.id.icon)
+        ImageView iconIV;
 
         public TopImgHolder(View itemView) {
             super(itemView);

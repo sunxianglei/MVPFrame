@@ -1,5 +1,7 @@
 package com.xianglei.mvpframe.module.home;
 
+import android.widget.Toast;
+
 import com.xianglei.mvpframe.base.inf.ICallBackListener;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
 import com.xianglei.mvpframe.data.bean.CommonBean;
@@ -32,10 +34,7 @@ public class HomeModel implements HomeContract.Model{
     }
 
     @Override
-    public void getArticles(int size, int page) {
-        if(1 == page){  //刷新了
-            mArticles.clear();
-        }
+    public void getArticles(final int size,final int page) {
         if(0 == size) {
             return;
         }
@@ -56,8 +55,16 @@ public class HomeModel implements HomeContract.Model{
                     @Override
                     public void accept(List<ArticleInfo> articleInfos) throws Exception {
                         Logger.d(TAG, "accept");
+                        if(1 == page){  //刷新了
+                            mArticles.clear();
+                        }
                         mArticles.addAll(articleInfos);
                         mCallBackListener.onSuccess(mArticles);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        mCallBackListener.onFailure();
                     }
                 });
     }
