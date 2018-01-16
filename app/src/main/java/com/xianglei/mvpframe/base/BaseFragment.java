@@ -26,7 +26,6 @@ public abstract class BaseFragment extends Fragment {
         View view = inflater.inflate(getLayoutId(), container, false);
         unbinder = ButterKnife.bind(this, view);
         initViews(view, savedInstanceState);
-        initParams();
         return view;
     }
 
@@ -42,11 +41,6 @@ public abstract class BaseFragment extends Fragment {
      * @param savedInstanceState
      */
     protected abstract void initViews(View view, Bundle savedInstanceState);
-
-    /**
-     * 初始化对象
-     */
-    protected abstract void initParams();
 
     /**
      * 回收资源

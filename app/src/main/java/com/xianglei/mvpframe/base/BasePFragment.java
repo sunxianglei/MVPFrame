@@ -26,6 +26,7 @@ public abstract class BasePFragment<V extends IView, P extends IPresenter> exten
             mPresenter = createPresenter();
             mPresenter.attachView(bindView());
         }
+        initParams();
     }
 
     @Override
@@ -38,6 +39,7 @@ public abstract class BasePFragment<V extends IView, P extends IPresenter> exten
     }
 
     public P getPresenter(){
+        if(mPresenter == null) throw new NullPointerException("presenter不能为空！");
         return mPresenter;
     }
 
@@ -52,4 +54,9 @@ public abstract class BasePFragment<V extends IView, P extends IPresenter> exten
      * @return
      */
     public abstract P createPresenter();
+
+    /**
+     * 对象操作（如进入页面第一次请求等）
+     */
+    protected abstract void initParams();
 }
