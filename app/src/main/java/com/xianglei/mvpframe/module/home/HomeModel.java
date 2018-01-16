@@ -1,7 +1,5 @@
 package com.xianglei.mvpframe.module.home;
 
-import android.widget.Toast;
-
 import com.xianglei.mvpframe.base.inf.ICallBackListener;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
 import com.xianglei.mvpframe.data.bean.CommonBean;
