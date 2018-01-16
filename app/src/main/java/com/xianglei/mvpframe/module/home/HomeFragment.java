@@ -10,7 +10,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xianglei.mvpframe.R;
-import com.xianglei.mvpframe.base.BaseFragment;
+import com.xianglei.mvpframe.base.BasePFragment;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
 import com.xianglei.mvpframe.utils.Logger;
 import com.xianglei.mvpframe.utils.PrintObject;
@@ -25,7 +25,8 @@ import butterknife.BindView;
  * @date 2017/12/24
  */
 
-public class HomeFragment extends BaseFragment implements HomeContract.View, OnRefreshListener, OnLoadmoreListener{
+public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.Presenter> implements HomeContract.View,
+        OnRefreshListener, OnLoadmoreListener{
 
     private static final String TAG = "HomeFragment";
     private static int SIZE = 10;
@@ -37,7 +38,16 @@ public class HomeFragment extends BaseFragment implements HomeContract.View, OnR
     RecyclerView mRecyclerView;
 
     private HomeAdapter mHomeAdapter;
-    private HomeContract.Presenter mHomePresenter;
+
+    @Override
+    public HomeContract.View bindView() {
+        return this;
+    }
+
+    @Override
+    public HomeContract.Presenter createPresenter() {
+        return new HomePresenter();
+    }
 
     @Override
     protected int getLayoutId() {
@@ -55,13 +65,12 @@ public class HomeFragment extends BaseFragment implements HomeContract.View, OnR
 
     @Override
     protected void initParams() {
-        mHomePresenter = new HomePresenter(this);
-        mHomePresenter.getArticles(SIZE,PAGE);
+        getPresenter().getArticles(SIZE,PAGE);
     }
 
     @Override
     protected void recycleRes() {
-        mHomePresenter = null;
+        mHomeAdapter = null;
     }
 
     @Override
@@ -85,17 +94,12 @@ public class HomeFragment extends BaseFragment implements HomeContract.View, OnR
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         PAGE = 1;
-        mHomePresenter.getArticles(SIZE,PAGE);
+        getPresenter().getArticles(SIZE,PAGE);
     }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
-        mHomePresenter.getArticles(SIZE,++PAGE);
+        getPresenter().getArticles(SIZE,++PAGE);
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        mHomePresenter.getArticles(SIZE,PAGE);
-//    }
 }

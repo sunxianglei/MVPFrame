@@ -24,7 +24,7 @@ public interface HomeContract {
         void getArticles(int size, int page);
     }
 
-    interface Presenter extends IPresenter {
+    interface Presenter extends IPresenter<View> {
         void getArticles(int size, int page);
     }
 }

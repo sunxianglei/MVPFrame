@@ -5,5 +5,9 @@ package com.xianglei.mvpframe.base.inf;
  * @date 2017/12/24
  */
 
-public interface IPresenter {
+public interface IPresenter<V extends IView> {
+
+    void attachView(V view);
+    void detachView();
+
 }
