@@ -3,8 +3,12 @@ package com.xianglei.mvpframe.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.xianglei.mvpframe.R;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -15,6 +19,8 @@ import butterknife.Unbinder;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private Unbinder unbinder;
 
     @Override
@@ -22,8 +28,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         unbinder = ButterKnife.bind(this);
+        initToolBar();
         initViews(savedInstanceState);
-        initParams();
+    }
+
+    private void initToolBar(){
+        setSupportActionBar(toolbar);
+    }
+
+    public Toolbar getToolbar(){
+        return toolbar;
     }
 
     /**
@@ -37,11 +51,6 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param savedInstanceState
      */
     protected abstract void initViews(Bundle savedInstanceState);
-
-    /**
-     * 初始化对象
-     */
-    protected abstract void initParams();
 
     /**
      * 回收资源
