@@ -21,10 +21,10 @@ public interface HomeContract {
     }
 
     interface Model extends IModel {
-        void getArticles(int size, int page);
+        void getArticles(String type, int size, int page);
     }
 
     interface Presenter extends IPresenter<View> {
-        void getArticles(int size, int page);
+        void getArticles(String type, int size, int page);
     }
 }

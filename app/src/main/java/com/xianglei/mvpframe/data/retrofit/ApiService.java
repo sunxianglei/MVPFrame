@@ -18,7 +18,7 @@ import retrofit2.http.Path;
 
 public interface ApiService {
 
-    @GET(Constant.PATH_ANDROID + "{size}/{page}")
-    Observable<CommonBean<List<ArticleInfo>>> getArticles(@Path("size") int size, @Path("page") int page);
+    @GET("{type}/{size}/{page}")
+    Observable<CommonBean<List<ArticleInfo>>> getArticles(@Path("type") String type, @Path("size") int size, @Path("page") int page);
 
 }

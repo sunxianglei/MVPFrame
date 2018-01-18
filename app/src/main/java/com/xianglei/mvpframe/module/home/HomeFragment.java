@@ -12,6 +12,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xianglei.mvpframe.R;
 import com.xianglei.mvpframe.base.BasePFragment;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
+import com.xianglei.mvpframe.utils.Constant;
 import com.xianglei.mvpframe.utils.Logger;
 import com.xianglei.mvpframe.utils.PrintObject;
 
@@ -29,8 +30,10 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
         OnRefreshListener, OnLoadmoreListener{
 
     private static final String TAG = "HomeFragment";
+    private static final String TYPE = "type";
     private static int SIZE = 10;
     private static int PAGE = 1;
+    private String mType = Constant.ANDROID;
 
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
@@ -38,6 +41,14 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
     RecyclerView mRecyclerView;
 
     private HomeAdapter mHomeAdapter;
+
+    public static HomeFragment newInstance(String str){
+        HomeFragment homeFragment = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(TYPE, str);
+        homeFragment.setArguments(bundle);
+        return homeFragment;
+    }
 
     @Override
     public HomeContract.View bindView() {
@@ -56,16 +67,23 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
 
     @Override
     protected void initViews(View view, Bundle savedInstanceState) {
+
+        mType = getArguments().getString(TYPE);
+        if(Constant.FULI == mType){
+
+        }else{
+            mHomeAdapter = new HomeAdapter(new ArrayList<ArticleInfo>(), getContext());
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mRecyclerView.setAdapter(mHomeAdapter);
+        }
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setOnLoadmoreListener(this);
-        mHomeAdapter = new HomeAdapter(new ArrayList<ArticleInfo>(), getContext());
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(mHomeAdapter);
+
     }
 
     @Override
     protected void initParams() {
-        getPresenter().getArticles(SIZE,PAGE);
+        getPresenter().getArticles(mType, SIZE, PAGE);
     }
 
     @Override
@@ -94,12 +112,12 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         PAGE = 1;
-        getPresenter().getArticles(SIZE,PAGE);
+        getPresenter().getArticles(mType, SIZE,PAGE);
     }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
-        getPresenter().getArticles(SIZE,++PAGE);
+        getPresenter().getArticles(mType, SIZE,++PAGE);
     }
 
 }

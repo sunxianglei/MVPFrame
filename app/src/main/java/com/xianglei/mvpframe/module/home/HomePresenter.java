@@ -38,10 +38,10 @@ public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract
     }
 
     @Override
-    public void getArticles(int size, int page) {
+    public void getArticles(String type, int size, int page) {
         if(getModel() != null){
             getView().showLoadingDialog();
-            getModel().getArticles(size, page);
+            getModel().getArticles(type, size, page);
         }
     }
 }

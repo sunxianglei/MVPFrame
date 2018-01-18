@@ -32,11 +32,11 @@ public class HomeModel implements HomeContract.Model{
     }
 
     @Override
-    public void getArticles(final int size,final int page) {
+    public void getArticles(String type, final int size,final int page) {
         if(0 == size) {
             return;
         }
-        Observable<CommonBean<List<ArticleInfo>>> ob = RetrofitFactory.getApiService().getArticles(size, page);
+        Observable<CommonBean<List<ArticleInfo>>> ob = RetrofitFactory.getApiService().getArticles(type,size, page);
         ob.subscribeOn(Schedulers.io())
                 .map(new Function<CommonBean<List<ArticleInfo>>, List<ArticleInfo>>() {
                     @Override
