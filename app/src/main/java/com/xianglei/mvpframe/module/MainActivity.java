@@ -2,7 +2,6 @@ package com.xianglei.mvpframe.module;
 
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +13,7 @@ import android.view.MenuItem;
 import com.xianglei.mvpframe.R;
 import com.xianglei.mvpframe.base.BaseActivity;
 import com.xianglei.mvpframe.module.home.HomeFragment;
+import com.xianglei.mvpframe.utils.Const;
 
 import butterknife.BindView;
 
@@ -45,15 +45,19 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
+    protected void initParams() {
+
+    }
+
+    @Override
     protected void recycleRes() {
 
     }
 
 
     private void initFragment(){
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        Fragment homeFragment = HomeFragment.newInstance("Android");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment homeFragment = HomeFragment.newInstance(Const.ANDROID);
         ft.add(R.id.content, homeFragment);
         ft.commit();
     }
@@ -95,24 +99,28 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        String type = "";
         if (id == R.id.nav_all) {
-
+            type = Const.ALL;
         } else if (id == R.id.nav_android) {
-
+            type = Const.ANDROID;
         } else if (id == R.id.nav_ios) {
-
+            type = Const.IOS;
         } else if (id == R.id.nav_qianduan) {
-
+            type = Const.QIANDUAN;
         } else if (id == R.id.nav_tuozhan) {
-
+            type = Const.TUOZHAN;
         } else if (id == R.id.nav_fuli) {
-
+            type = Const.FULI;
         } else if (id == R.id.nav_shipin) {
-
+            type = Const.SHIPIN;
         } else if (id == R.id.nav_tuijian) {
-
+            type = Const.TUIJIAN;
         }
-
+        Fragment homeFragment = HomeFragment.newInstance(type);
+        ft.replace(R.id.content, homeFragment);
+        ft.commit();
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -1,8 +1,10 @@
 package com.xianglei.mvpframe.module.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -11,8 +13,10 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xianglei.mvpframe.R;
 import com.xianglei.mvpframe.base.BasePFragment;
+import com.xianglei.mvpframe.base.inf.OnItemClickListener;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
-import com.xianglei.mvpframe.utils.Constant;
+import com.xianglei.mvpframe.module.detail.DetailActivity;
+import com.xianglei.mvpframe.utils.Const;
 import com.xianglei.mvpframe.utils.Logger;
 import com.xianglei.mvpframe.utils.PrintObject;
 
@@ -27,13 +31,13 @@ import butterknife.BindView;
  */
 
 public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.Presenter> implements HomeContract.View,
-        OnRefreshListener, OnLoadmoreListener{
+        OnRefreshListener, OnLoadmoreListener, OnItemClickListener{
 
     private static final String TAG = "HomeFragment";
     private static final String TYPE = "type";
     private static int SIZE = 10;
     private static int PAGE = 1;
-    private String mType = Constant.ANDROID;
+    private String mType = Const.ANDROID;
 
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
@@ -41,6 +45,8 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
     RecyclerView mRecyclerView;
 
     private HomeAdapter mHomeAdapter;
+    private FuliAdapter mFuliAdapter;
+    private List<ArticleInfo> articleInfos;
 
     public static HomeFragment newInstance(String str){
         HomeFragment homeFragment = new HomeFragment();
@@ -69,10 +75,13 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
     protected void initViews(View view, Bundle savedInstanceState) {
 
         mType = getArguments().getString(TYPE);
-        if(Constant.FULI == mType){
-
+        if(Const.FULI == mType){
+            mFuliAdapter = new FuliAdapter(new ArrayList<ArticleInfo>(), getContext());
+            mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+            mRecyclerView.setAdapter(mFuliAdapter);
         }else{
             mHomeAdapter = new HomeAdapter(new ArrayList<ArticleInfo>(), getContext());
+            mHomeAdapter.setOnItemClickListener(this);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mRecyclerView.setAdapter(mHomeAdapter);
         }
@@ -89,6 +98,7 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
     @Override
     protected void recycleRes() {
         mHomeAdapter = null;
+        mFuliAdapter = null;
     }
 
     @Override
@@ -105,7 +115,12 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
     public void setArticleList(List<ArticleInfo> articleList) {
         mRefreshLayout.finishRefresh();
         mRefreshLayout.finishLoadmore();
-        mHomeAdapter.setData(articleList);
+        if(Const.FULI == mType){
+            mFuliAdapter.setData(articleList);
+        }else {
+            mHomeAdapter.setData(articleList);
+        }
+        articleInfos = articleList;
         Logger.d(TAG, PrintObject.toString(articleList.get(0)));
     }
 
@@ -120,4 +135,10 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
         getPresenter().getArticles(mType, SIZE,++PAGE);
     }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra(Const.URL, articleInfos.get(position).getUrl());
+        startActivity(intent);
+    }
 }

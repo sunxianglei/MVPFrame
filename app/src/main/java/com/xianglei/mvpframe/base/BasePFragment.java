@@ -21,21 +21,20 @@ public abstract class BasePFragment<V extends IView, P extends IPresenter> exten
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         if(mPresenter == null){
             mPresenter = createPresenter();
             mPresenter.attachView(bindView());
         }
-        initParams();
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         if(mPresenter != null){
             mPresenter.detachView();
         }
         mPresenter = null;
+        super.onDestroyView();
     }
 
     public P getPresenter(){
@@ -55,8 +54,4 @@ public abstract class BasePFragment<V extends IView, P extends IPresenter> exten
      */
     public abstract P createPresenter();
 
-    /**
-     * 对象操作（如进入页面第一次请求等）
-     */
-    protected abstract void initParams();
 }

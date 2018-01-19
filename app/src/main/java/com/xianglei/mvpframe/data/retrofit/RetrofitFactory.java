@@ -1,7 +1,7 @@
 package com.xianglei.mvpframe.data.retrofit;
 
 import com.xianglei.mvpframe.utils.Config;
-import com.xianglei.mvpframe.utils.Constant;
+import com.xianglei.mvpframe.utils.Const;
 
 import java.util.concurrent.TimeUnit;
 
@@ -37,7 +37,7 @@ public class RetrofitFactory {
                             .retryOnConnectionFailure(true)
                             .addInterceptor(interceptor);
                     mRetrofit = new Retrofit.Builder()
-                            .baseUrl(Constant.GANK_URL)
+                            .baseUrl(Const.GANK_URL)
                             .client(client.build())
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

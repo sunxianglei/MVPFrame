@@ -32,8 +32,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         initViews(savedInstanceState);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initParams();
+    }
+
     private void initToolBar(){
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public Toolbar getToolbar(){
@@ -53,14 +66,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initViews(Bundle savedInstanceState);
 
     /**
+     * 对象操作（如进入页面第一次请求等）
+     */
+    protected abstract void initParams();
+
+    /**
      * 回收资源
      */
     protected abstract void recycleRes();
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         unbinder.unbind();
         recycleRes();
+        super.onDestroy();
     }
 }

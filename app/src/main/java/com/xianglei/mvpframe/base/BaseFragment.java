@@ -29,6 +29,12 @@ public abstract class BaseFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initParams();
+    }
+
     /**
      * 设置布局资源文件
      * @return
@@ -43,14 +49,19 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void initViews(View view, Bundle savedInstanceState);
 
     /**
+     * 对象操作（如进入页面第一次请求等）
+     */
+    protected abstract void initParams();
+
+    /**
      * 回收资源
      */
     protected abstract void recycleRes();
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         unbinder.unbind();
         recycleRes();
+        super.onDestroyView();
     }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xianglei.mvpframe.R;
+import com.xianglei.mvpframe.base.inf.OnItemClickListener;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
 
 import java.util.List;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
  * @date 2018/1/5
  */
 
-public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private static final int ITEM_TYPE_NORMAL = 0;
     private static final int ITEM_TYPE_RIGHTIMG = 1;
@@ -30,6 +31,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ArticleInfo> articleInfos;
     private Context context;
+    private OnItemClickListener mOnItemClickListener;
 
     public HomeAdapter(Context context){
         this.context = context;
@@ -45,6 +47,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.notifyDataSetChanged();
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.mOnItemClickListener = listener;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (ITEM_TYPE_RIGHTIMG == viewType) {
@@ -57,7 +63,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if(holder instanceof NormalHolder){
             ((NormalHolder) holder).contentTV.setText(articleInfos.get(position).getDesc());
             ((NormalHolder) holder).domainTV.setText(articleInfos.get(position).getType());
@@ -79,6 +85,12 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .load(articleInfos.get(position).getImages().get(0))
                     .into(((TopImgHolder) holder).iconIV);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOnItemClickListener.onItemClick(view, position);
+            }
+        });
     }
 
     @Override

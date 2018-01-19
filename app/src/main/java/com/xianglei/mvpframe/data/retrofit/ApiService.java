@@ -2,7 +2,6 @@ package com.xianglei.mvpframe.data.retrofit;
 
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
 import com.xianglei.mvpframe.data.bean.CommonBean;
-import com.xianglei.mvpframe.utils.Constant;
 
 import java.util.List;
 
