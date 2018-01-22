@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.xianglei.mvpframe.GlideApp;
 import com.xianglei.mvpframe.R;
 import com.xianglei.mvpframe.base.inf.OnItemClickListener;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
@@ -74,15 +74,21 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ((RightImgHolder) holder).contentTV.setText(articleInfos.get(position).getDesc());
             ((RightImgHolder) holder).domainTV.setText(articleInfos.get(position).getType());
             ((RightImgHolder) holder).authorTV.setText(articleInfos.get(position).getWho());
-            Glide.with(context)
+            GlideApp.with(context)
                     .load(articleInfos.get(position).getImages().get(0))
+                    .centerCrop()
+                    .placeholder(R.drawable.default_icon)
+                    .error(R.drawable.default_icon)
                     .into(((RightImgHolder) holder).iconIV);
         }else if(holder instanceof TopImgHolder){
             ((TopImgHolder) holder).contentTV.setText(articleInfos.get(position).getDesc());
             ((TopImgHolder) holder).domainTV.setText(articleInfos.get(position).getType());
             ((TopImgHolder) holder).authorTV.setText(articleInfos.get(position).getWho());
-            Glide.with(context)
+            GlideApp.with(context)
                     .load(articleInfos.get(position).getImages().get(0))
+                    .centerCrop()
+                    .placeholder(R.drawable.default_icon)
+                    .error(R.drawable.default_icon)
                     .into(((TopImgHolder) holder).iconIV);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {

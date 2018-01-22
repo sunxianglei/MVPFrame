@@ -3,7 +3,9 @@ package com.xianglei.mvpframe.base;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.xianglei.mvpframe.base.inf.IPresenter;
 import com.xianglei.mvpframe.base.inf.IView;
@@ -19,13 +21,14 @@ public abstract class BasePFragment<V extends IView, P extends IPresenter> exten
 
     private P mPresenter;
 
+    @Nullable
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(mPresenter == null){
             mPresenter = createPresenter();
             mPresenter.attachView(bindView());
         }
-        super.onViewCreated(view, savedInstanceState);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override

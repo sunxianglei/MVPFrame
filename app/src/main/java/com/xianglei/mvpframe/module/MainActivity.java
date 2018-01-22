@@ -16,6 +16,7 @@ import com.xianglei.mvpframe.module.home.HomeFragment;
 import com.xianglei.mvpframe.utils.Const;
 
 import butterknife.BindView;
+import skin.support.SkinCompatManager;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -87,6 +88,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }else if(id == R.id.theme_black){
+            SkinCompatManager.getInstance().loadSkin("night", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
+            return true;
+        }else if(id == R.id.theme_red){
+            return true;
+        }else if(id == R.id.theme_blue){
+            SkinCompatManager.getInstance().restoreDefaultTheme();
             return true;
         }
 

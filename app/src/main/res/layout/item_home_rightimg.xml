@@ -52,8 +52,6 @@
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginStart="8dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent" />

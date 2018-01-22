@@ -108,20 +108,20 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
 
     @Override
     public void dismissLoadingDialog() {
+        mRefreshLayout.finishRefresh();
+        mRefreshLayout.finishLoadmore();
         Logger.d(TAG, "dismissLoadingDialog");
     }
 
     @Override
     public void setArticleList(List<ArticleInfo> articleList) {
-        mRefreshLayout.finishRefresh();
-        mRefreshLayout.finishLoadmore();
         if(Const.FULI == mType){
             mFuliAdapter.setData(articleList);
         }else {
             mHomeAdapter.setData(articleList);
         }
         articleInfos = articleList;
-        Logger.d(TAG, PrintObject.toString(articleList.get(0)));
+//        Logger.d(TAG, PrintObject.toString(articleList.get(0)));
     }
 
     @Override

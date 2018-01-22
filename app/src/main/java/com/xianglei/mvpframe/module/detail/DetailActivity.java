@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import com.xianglei.mvpframe.R;
@@ -32,13 +33,24 @@ public class DetailActivity extends BaseActivity {
         linearLayout.addView(mWebView);
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
+        //支持屏幕缩放
         settings.setSupportZoom(true);
+        settings.setBuiltInZoomControls(true);
+        //不显示webview缩放按钮
+        settings.setDisplayZoomControls(false);
     }
 
     @Override
     protected void initParams() {
         String url = getIntent().getExtras().getString(Const.URL);
         mWebView.loadUrl(url);
+        mWebView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
     }
 
     @Override

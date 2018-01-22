@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import com.xianglei.mvpframe.GlideApp;
 import com.xianglei.mvpframe.R;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
 import com.xianglei.mvpframe.utils.DisplayUtil;
@@ -47,8 +47,11 @@ public class FuliAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewGroup.LayoutParams lp = ((FuliHolder)holder).fuliIV.getLayoutParams();
         lp.height = DisplayUtil.dip2px(context, MathUtil.randomInt(130,260));
-        Glide.with(context)
+        GlideApp.with(context)
                 .load(articleInfos.get(position).getUrl())
+                .centerCrop()
+                .placeholder(R.drawable.default_icon)
+                .error(R.drawable.default_icon)
                 .into(((FuliHolder)holder).fuliIV);
     }
 

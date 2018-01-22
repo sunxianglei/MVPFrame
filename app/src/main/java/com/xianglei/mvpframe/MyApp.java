@@ -13,6 +13,8 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
+import skin.support.SkinCompatManager;
+
 /**
  * @author sunxianglei
  * @date 2018/1/5
@@ -38,5 +40,8 @@ public class MyApp extends Application {
                 return new ClassicsFooter(context).setDrawableSize(20);
             }
         });
+
+        SkinCompatManager.withoutActivity(this).loadSkin();
     }
 }
+
