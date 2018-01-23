@@ -3,4 +3,9 @@
     <color name="colorPrimary_night">#474748</color>
     <color name="colorPrimaryDark_night">#2f2f30</color>
     <color name="colorAccent_night">#979797</color>
+
+    <color name="drawer_item_background_night">#474748</color>
+    <color name="text_color_night">#ffffff</color>
+    <color name="cardview_background_night">#474748</color>
+    <color name="background_night">#2f2f30</color>
 </resources>

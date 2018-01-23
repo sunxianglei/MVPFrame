@@ -43,6 +43,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        /**设置MenuItem默认选中项**/
+        navigationView.getMenu().getItem(1).setChecked(true);
     }
 
     @Override
@@ -92,7 +94,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }else if(id == R.id.theme_black){
             SkinCompatManager.getInstance().loadSkin("night", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
             return true;
-        }else if(id == R.id.theme_red){
+        }else if(id == R.id.theme_green){
+            SkinCompatManager.getInstance().loadSkin("skin-green.skin", SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
             return true;
         }else if(id == R.id.theme_blue){
             SkinCompatManager.getInstance().restoreDefaultTheme();

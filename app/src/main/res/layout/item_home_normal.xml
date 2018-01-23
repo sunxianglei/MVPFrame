@@ -9,7 +9,8 @@
     android:layout_marginTop="@dimen/margin_small"
     app:cardCornerRadius="@dimen/corner_radius_small"
     app:cardElevation="@dimen/elevation_small"
-    app:contentPadding="@dimen/padding_normal">
+    app:contentPadding="@dimen/padding_normal"
+    app:cardBackgroundColor="@color/cardview_background">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,6 +23,7 @@
             android:layout_marginBottom="8dp"
             android:maxLines="2"
             android:text="TextView"
+            android:textColor="@color/text_color"
             app:layout_constraintBottom_toTopOf="@+id/icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -41,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:text="TextView"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/caption_textsize"
             app:layout_constraintBottom_toBottomOf="@+id/icon"
             app:layout_constraintStart_toEndOf="@+id/icon"
@@ -52,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="TextView"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/caption_textsize"
             app:layout_constraintStart_toEndOf="@+id/tv_domain"
             app:layout_constraintTop_toTopOf="@+id/tv_domain" />
@@ -62,7 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="TextView"
-            android:textSize="12sp"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/caption_textsize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_author" />
     </android.support.constraint.ConstraintLayout>

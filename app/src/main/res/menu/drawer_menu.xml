@@ -24,25 +24,18 @@
             android:id="@+id/nav_tuozhan"
             android:icon="@drawable/ic_menu_camera"
             android:title="拓展资源" />
+        <item
+            android:id="@+id/nav_fuli"
+            android:icon="@drawable/ic_mood_black_24dp"
+            android:title="福利" />
+        <item
+            android:id="@+id/nav_shipin"
+            android:icon="@drawable/ic_menu_send"
+            android:title="休息视频" />
+        <item
+            android:id="@+id/nav_tuijian"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="瞎推荐" />
     </group>
-
-    <item android:title="休闲区">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_fuli"
-                    android:icon="@drawable/ic_mood_black_24dp"
-                    android:title="福利" />
-                <item
-                    android:id="@+id/nav_shipin"
-                    android:icon="@drawable/ic_menu_send"
-                    android:title="休息视频" />
-                <item
-                    android:id="@+id/nav_tuijian"
-                    android:icon="@drawable/ic_menu_manage"
-                    android:title="瞎推荐" />
-            </group>
-        </menu>
-    </item>
 
 </menu>

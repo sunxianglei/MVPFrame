@@ -14,6 +14,7 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import skin.support.SkinCompatManager;
+import skin.support.app.SkinCardViewInflater;
 
 /**
  * @author sunxianglei
@@ -41,7 +42,9 @@ public class MyApp extends Application {
             }
         });
 
-        SkinCompatManager.withoutActivity(this).loadSkin();
+        SkinCompatManager.withoutActivity(this).
+                addInflater(new SkinCardViewInflater())
+                .loadSkin();
     }
 }
 
