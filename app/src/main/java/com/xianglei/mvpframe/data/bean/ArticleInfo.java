@@ -1,5 +1,6 @@
 package com.xianglei.mvpframe.data.bean;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,8 +21,8 @@ public class ArticleInfo {
      * desc : 图解RxJava2(二)
      * who : HuYounger
      */
-    private String createdAt;
-    private String publishedAt;
+    private Date createdAt;
+    private Date publishedAt;
     private String _id;
     private String source;
     private boolean used;
@@ -31,12 +32,12 @@ public class ArticleInfo {
     private String who;
     private List<String> images;
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
 
-    public void setPublishedAt(String publishedAt) {
+    public void setPublishedAt(Date publishedAt) {
         this.publishedAt = publishedAt;
     }
 
@@ -68,11 +69,11 @@ public class ArticleInfo {
         this.who = who;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public String getPublishedAt() {
+    public Date getPublishedAt() {
         return publishedAt;
     }
 

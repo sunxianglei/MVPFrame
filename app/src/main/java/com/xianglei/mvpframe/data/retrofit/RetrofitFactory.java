@@ -1,5 +1,7 @@
 package com.xianglei.mvpframe.data.retrofit;
 
+import android.net.ConnectivityManager;
+
 import com.xianglei.mvpframe.utils.Config;
 import com.xianglei.mvpframe.utils.Const;
 
@@ -18,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitFactory {
 
-    private static final int DEFAULT_TIMEOUT = 30;
+    private static final int DEFAULT_TIMEOUT = 10;
 
     private static Retrofit mRetrofit;
 

@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -92,25 +93,13 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
 
     @Override
     protected void initParams() {
-        getPresenter().getArticles(mType, SIZE, PAGE);
+        mRefreshLayout.autoRefresh();
     }
 
     @Override
     protected void recycleRes() {
         mHomeAdapter = null;
         mFuliAdapter = null;
-    }
-
-    @Override
-    public void showLoadingDialog() {
-        Logger.d(TAG, "showLoadingDialog");
-    }
-
-    @Override
-    public void dismissLoadingDialog() {
-        mRefreshLayout.finishRefresh();
-        mRefreshLayout.finishLoadmore();
-        Logger.d(TAG, "dismissLoadingDialog");
     }
 
     @Override
@@ -121,18 +110,33 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
             mHomeAdapter.setData(articleList);
         }
         articleInfos = articleList;
-//        Logger.d(TAG, PrintObject.toString(articleList.get(0)));
+        LoadingFinish();
+    }
+
+    @Override
+    public void requestFailure() {
+        LoadingFinish();
+        Toast.makeText(getContext(), "数据获取失败", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         PAGE = 1;
-        getPresenter().getArticles(mType, SIZE,PAGE);
+        getPresenter().getArticles(mType, SIZE, PAGE);
     }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
-        getPresenter().getArticles(mType, SIZE,++PAGE);
+        getPresenter().getArticles(mType, SIZE, ++PAGE);
+    }
+
+    private void LoadingFinish(){
+        if(mRefreshLayout.isRefreshing()){
+            mRefreshLayout.finishRefresh();
+        }
+        if(mRefreshLayout.isLoading()){
+            mRefreshLayout.finishLoadmore();
+        }
     }
 
     @Override

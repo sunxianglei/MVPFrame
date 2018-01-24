@@ -19,4 +19,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" ></style>
 
+    <declare-styleable name="LoadingView">
+        <attr name="loading_text_color" format="color"/>
+        <attr name="loading_circle_color" format="color"/>
+    </declare-styleable>
+
 </resources>

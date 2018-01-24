@@ -16,8 +16,9 @@ import java.util.List;
 
 public interface HomeContract {
 
-    interface View extends ILoadingView {
+    interface View extends IView {
         void setArticleList(List<ArticleInfo> articleList);
+        void requestFailure();
     }
 
     interface Model extends IModel {

@@ -62,6 +62,7 @@ public class HomeModel implements HomeContract.Model{
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
+                        Logger.d(TAG, "onFailure");
                         mCallBackListener.onFailure();
                     }
                 });

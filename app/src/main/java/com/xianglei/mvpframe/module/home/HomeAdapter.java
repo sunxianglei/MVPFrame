@@ -13,6 +13,7 @@ import com.xianglei.mvpframe.R;
 import com.xianglei.mvpframe.base.inf.OnItemClickListener;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -57,9 +58,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             return new RightImgHolder(LayoutInflater.from(context).inflate(R.layout.item_home_rightimg, parent, false));
         } else if (ITEM_TYPE_TOPIMG == viewType) {
             return new TopImgHolder(LayoutInflater.from(context).inflate(R.layout.item_home_topimg, parent, false));
-        } else {
+        } else if(ITEM_TYPE_NORMAL == viewType){
             return new NormalHolder(LayoutInflater.from(context).inflate(R.layout.item_home_normal, parent, false));
         }
+        return null;
     }
 
     @Override
@@ -68,7 +70,8 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ((NormalHolder) holder).contentTV.setText(articleInfos.get(position).getDesc());
             ((NormalHolder) holder).domainTV.setText(articleInfos.get(position).getType());
             ((NormalHolder) holder).authorTV.setText(articleInfos.get(position).getWho());
-            ((NormalHolder) holder).timeTV.setText(articleInfos.get(position).getPublishedAt());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            ((NormalHolder) holder).timeTV.setText(sdf.format(articleInfos.get(position).getPublishedAt()));
 //            ((NormalHolder) holder).iconIV.setBackground();
         }else if(holder instanceof RightImgHolder){
             ((RightImgHolder) holder).contentTV.setText(articleInfos.get(position).getDesc());

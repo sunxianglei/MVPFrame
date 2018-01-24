@@ -2,7 +2,11 @@ package com.xianglei.mvpframe;
 
 import android.app.Application;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.widget.Toast;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
@@ -45,6 +49,22 @@ public class MyApp extends Application {
         SkinCompatManager.withoutActivity(this).
                 addInflater(new SkinCardViewInflater())
                 .loadSkin();
+
+        if(!isNetWorkAvailable()){
+            Toast.makeText(getApplicationContext(), "网络连接不可用", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * 判断网络是否连接
+     */
+    private boolean isNetWorkAvailable(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+        if(info != null){
+            return info.isAvailable();
+        }
+        return false;
     }
 }
 

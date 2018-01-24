@@ -1,5 +1,6 @@
 package com.xianglei.mvpframe.module.detail;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -19,6 +20,7 @@ import com.xianglei.mvpframe.utils.Const;
 
 public class DetailActivity extends BaseActivity {
 
+    private LinearLayout linearLayout;
     private WebView mWebView;
 
     @Override
@@ -29,8 +31,7 @@ public class DetailActivity extends BaseActivity {
     @Override
     protected void initViews(Bundle savedInstanceState) {
         mWebView = new WebView(this);
-        LinearLayout linearLayout = findViewById(R.id.linear_layout);
-        linearLayout.addView(mWebView);
+        linearLayout = findViewById(R.id.linear_layout);
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         //支持屏幕缩放
@@ -49,6 +50,16 @@ public class DetailActivity extends BaseActivity {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return true;
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
             }
         });
     }

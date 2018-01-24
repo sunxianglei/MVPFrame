@@ -1,9 +1,12 @@
 package com.xianglei.mvpframe.module.home;
 
+import android.util.Log;
+
 import com.xianglei.mvpframe.base.BasePresenter;
 import com.xianglei.mvpframe.base.inf.ICallBackListener;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
 import com.xianglei.mvpframe.data.bean.CommonBean;
+import com.xianglei.mvpframe.utils.Logger;
 
 import java.util.List;
 
@@ -25,7 +28,6 @@ public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract
     @Override
     public void onSuccess(List<ArticleInfo> data) {
         if(getView() != null){
-            getView().dismissLoadingDialog();
             getView().setArticleList(data);
         }
     }
@@ -33,14 +35,13 @@ public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract
     @Override
     public void onFailure() {
         if(getView() != null){
-            getView().dismissLoadingDialog();
+            getView().requestFailure();
         }
     }
 
     @Override
     public void getArticles(String type, int size, int page) {
         if(getModel() != null){
-            getView().showLoadingDialog();
             getModel().getArticles(type, size, page);
         }
     }
