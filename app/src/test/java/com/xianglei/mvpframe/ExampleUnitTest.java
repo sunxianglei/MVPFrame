@@ -18,17 +18,4 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
-
-    @Test
-    public void test() throws Exception {
-        HomeAdapter adapter = new HomeAdapter(null);
-        for(int i=0;i<3;i++) {
-            int result = adapter.getDrawableRes(Const.FULI);
-            System.out.println(Const.FULI + "-->" +  result);
-        }
-        for(int i=0;i<3;i++) {
-            int result = adapter.getDrawableRes(Const.ANDROID);
-            System.out.println(Const.ANDROID + "-->" +  result);
-        }
-    }
 }
