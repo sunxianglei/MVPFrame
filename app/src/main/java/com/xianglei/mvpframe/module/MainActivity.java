@@ -43,8 +43,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        /**设置MenuItem默认选中项**/
-        navigationView.getMenu().getItem(1).setChecked(true);
+        navigationView.getMenu().getItem(1).setChecked(true);  //设置MenuItem默认选中项
     }
 
     @Override

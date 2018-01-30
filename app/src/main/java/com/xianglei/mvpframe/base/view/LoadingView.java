@@ -114,4 +114,10 @@ public class LoadingView extends View {
         this.progress = progress;
         invalidate();
     }
+    public void show(){
+        this.setVisibility(View.VISIBLE);
+    }
+    public void hide(){
+        this.setVisibility(View.GONE);
+    }
 }

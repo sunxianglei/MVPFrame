@@ -32,6 +32,7 @@ public class DetailActivity extends BaseActivity {
     protected void initViews(Bundle savedInstanceState) {
         mWebView = new WebView(this);
         linearLayout = findViewById(R.id.linear_layout);
+        linearLayout.addView(mWebView);
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         //支持屏幕缩放

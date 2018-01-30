@@ -12,6 +12,7 @@ import com.xianglei.mvpframe.GlideApp;
 import com.xianglei.mvpframe.R;
 import com.xianglei.mvpframe.base.inf.OnItemClickListener;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
+import com.xianglei.mvpframe.utils.Const;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -72,7 +73,9 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ((NormalHolder) holder).authorTV.setText(articleInfos.get(position).getWho());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             ((NormalHolder) holder).timeTV.setText(sdf.format(articleInfos.get(position).getPublishedAt()));
-//            ((NormalHolder) holder).iconIV.setBackground();
+            GlideApp.with(context)
+                    .load(getDrawableRes(articleInfos.get(position).getType()))
+                    .into(((NormalHolder) holder).iconIV);
         }else if(holder instanceof RightImgHolder){
             ((RightImgHolder) holder).contentTV.setText(articleInfos.get(position).getDesc());
             ((RightImgHolder) holder).domainTV.setText(articleInfos.get(position).getType());
@@ -97,9 +100,42 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOnItemClickListener.onItemClick(view, position);
+                if(mOnItemClickListener != null) mOnItemClickListener.onItemClick(view, position);
             }
         });
+    }
+
+    public int getDrawableRes(String type){
+        int drawble = R.drawable.ic_menu_android_24dp;
+        switch (type){
+            case Const.ALL:
+                drawble = R.drawable.ic_menu_all;
+                break;
+            case Const.ANDROID:
+                drawble = R.drawable.ic_menu_android_24dp;
+                break;
+            case Const.IOS:
+                drawble = R.drawable.ic_menu_apple;
+                break;
+            case Const.FULI:
+                drawble = R.drawable.ic_menu_mood_24dp;
+                break;
+            case Const.QIANDUAN:
+                drawble = R.drawable.ic_menu_qianduan;
+                break;
+            case Const.SHIPIN:
+                drawble = R.drawable.ic_menu_video;
+                break;
+            case Const.TUIJIAN:
+                drawble = R.drawable.ic_menu_more;
+                break;
+            case Const.TUOZHAN:
+                drawble = R.drawable.ic_menu_tuozhan;
+                break;
+            default:
+                break;
+        }
+        return drawble;
     }
 
     @Override

@@ -4,6 +4,9 @@ import com.xianglei.mvpframe.base.inf.IModel;
 import com.xianglei.mvpframe.base.inf.IPresenter;
 import com.xianglei.mvpframe.base.inf.IView;
 
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
+
 /**
  * @author sunxianglei
  * @date 2018/1/16
@@ -11,7 +14,7 @@ import com.xianglei.mvpframe.base.inf.IView;
 
 public abstract class BasePresenter<V extends IView, M extends IModel> implements IPresenter<V> {
 
-    private V mView;
+    private Reference<V> mViewRef;  //View接口类型的弱引用
     private M mModel;
 
     /**
@@ -20,7 +23,7 @@ public abstract class BasePresenter<V extends IView, M extends IModel> implement
      */
     @Override
     public void attachView(V view) {
-        this.mView = view;
+        mViewRef = new WeakReference<V>(view);  //建立关联
         mModel = createModel();
     }
 
@@ -29,12 +32,15 @@ public abstract class BasePresenter<V extends IView, M extends IModel> implement
      */
     @Override
     public void detachView(){
-        mView = null;
+        if(mViewRef != null) {
+            mViewRef.clear();   //解除关联
+            mViewRef = null;
+        }
         mModel = null;
     }
 
     public V getView(){
-        return mView;
+        return mViewRef.get();
     }
 
     public M getModel(){

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.xianglei.mvpframe.GlideApp;
 import com.xianglei.mvpframe.R;
+import com.xianglei.mvpframe.base.inf.OnItemClickListener;
 import com.xianglei.mvpframe.data.bean.ArticleInfo;
 import com.xianglei.mvpframe.utils.DisplayUtil;
 import com.xianglei.mvpframe.utils.MathUtil;
@@ -27,6 +28,7 @@ public class FuliAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private List<ArticleInfo> articleInfos;
     private Context context;
+    private OnItemClickListener mOnItemClickListener;
 
     public FuliAdapter(List<ArticleInfo> articleInfos, Context context) {
         this.articleInfos = articleInfos;
@@ -44,7 +46,7 @@ public class FuliAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ViewGroup.LayoutParams lp = ((FuliHolder)holder).fuliIV.getLayoutParams();
         lp.height = DisplayUtil.dip2px(context, MathUtil.randomInt(130,260));
         GlideApp.with(context)
@@ -53,6 +55,16 @@ public class FuliAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 .placeholder(R.drawable.default_icon)
                 .error(R.drawable.default_icon)
                 .into(((FuliHolder)holder).fuliIV);
+        ((FuliHolder)holder).fuliIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mOnItemClickListener != null) mOnItemClickListener.onItemClick(view, position);
+            }
+        });
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.mOnItemClickListener = listener;
     }
 
     @Override

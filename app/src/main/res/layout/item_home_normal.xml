@@ -91,7 +91,6 @@
             android:layout_width="@dimen/mini_icon"
             android:layout_height="@dimen/mini_icon"
             android:layout_below="@+id/tv_content"
-            android:background="@drawable/ic_android_black_12dp"
             android:scaleType="centerCrop" />
 
         <TextView
