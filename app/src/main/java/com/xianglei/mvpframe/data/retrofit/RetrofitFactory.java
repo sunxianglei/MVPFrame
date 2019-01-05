@@ -24,6 +24,34 @@ public class RetrofitFactory {
 
     private static Retrofit mRetrofit;
 
+    public static Retrofit getInstance(){
+        return RetrofitFactoryHolder.instance;
+    }
+
+    private static class RetrofitFactoryHolder{
+        private static final Retrofit instance = getInstance();
+
+        private static Retrofit getInstance(){
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            if(Config.DEBUG){
+                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            }else{
+                interceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
+            }
+            OkHttpClient.Builder client = new OkHttpClient.Builder()
+                    .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                    .retryOnConnectionFailure(true)
+                    .addInterceptor(interceptor);
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Const.GANK_URL)
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build();
+            return retrofit;
+        }
+    }
+
     public static Retrofit getRetrofit() {
         if (mRetrofit == null) {
             synchronized (RetrofitFactory.class) {
@@ -41,7 +69,8 @@ public class RetrofitFactory {
                     mRetrofit = new Retrofit.Builder()
                             .baseUrl(Const.GANK_URL)
                             .client(client.build())
-                            .addConverterFactory(GsonConverterFactory.create())
+//                            .addConverterFactory(GsonConverterFactory.create())
+                            .addConverterFactory(new StringConverterFactory())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .build();
                 }

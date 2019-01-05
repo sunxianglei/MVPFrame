@@ -1,6 +1,8 @@
 package com.xianglei.mvpframe;
 
 import com.xianglei.mvpframe.module.home.HomeAdapter;
+import com.xianglei.mvpframe.module.home.HomeModel;
+import com.xianglei.mvpframe.test.NQueen;
 import com.xianglei.mvpframe.utils.Const;
 import com.xianglei.mvpframe.utils.Logger;
 
@@ -17,5 +19,11 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
+    }
+
+    @Test
+    public void testQueen(){
+        NQueen queen = new NQueen();
+        queen.printResult(4);
     }
 }

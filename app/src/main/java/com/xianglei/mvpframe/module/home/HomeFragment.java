@@ -111,7 +111,7 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
 
     @Override
     protected void initParams() {
-        mRefreshLayout.autoRefresh();
+        getPresenter().getArticles(mType, SIZE, PAGE);
     }
 
     @Override
@@ -168,6 +168,12 @@ public class HomeFragment extends BasePFragment<HomeContract.View, HomeContract.
         }
     }
 
+    /**
+     * 缩放图片
+     * from google develop
+     * @param thumbView
+     * @param imageRes
+     */
     private void zoomImageFromThumb(final ImageView thumbView, String imageRes) {
         if (mCurrentAnimator != null) {
             mCurrentAnimator.cancel();

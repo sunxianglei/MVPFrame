@@ -31,6 +31,9 @@ public class DetailActivity extends BaseActivity {
     @Override
     protected void initViews(Bundle savedInstanceState) {
         mWebView = new WebView(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        mWebView.setLayoutParams(params);
         linearLayout = findViewById(R.id.linear_layout);
         linearLayout.addView(mWebView);
         WebSettings settings = mWebView.getSettings();

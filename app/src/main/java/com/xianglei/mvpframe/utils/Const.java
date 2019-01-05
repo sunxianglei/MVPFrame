@@ -8,7 +8,7 @@ package com.xianglei.mvpframe.utils;
 
 public class Const {
 
-    public static final String GANK_URL = "http://gank.io/api/data/";
+    public static final String GANK_URL = "http://gank.io/";
     public static final String ALL = "all";
     public static final String ANDROID = "Android";
     public static final String IOS = "iOS";
