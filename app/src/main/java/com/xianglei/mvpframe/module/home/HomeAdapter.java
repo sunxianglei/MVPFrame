@@ -67,6 +67,9 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        if(articleInfos == null){
+            return;
+        }
         if(holder instanceof NormalHolder){
             ((NormalHolder) holder).contentTV.setText(articleInfos.get(position).getDesc());
             ((NormalHolder) holder).domainTV.setText(articleInfos.get(position).getType());
