@@ -69,7 +69,7 @@ public class RetrofitFactory {
                     mRetrofit = new Retrofit.Builder()
                             .baseUrl(Const.GANK_URL)
                             .client(client.build())
-//                            .addConverterFactory(GsonConverterFactory.create())
+                            .addConverterFactory(GsonConverterFactory.create())
                             .addConverterFactory(new StringConverterFactory())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .build();
